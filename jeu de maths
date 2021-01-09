@@ -1,0 +1,58 @@
+# logiciel qui permet de generer une opération mathématique aléatoire
+# demande le résultats a l'utilisateur
+# droit a 3 erreurs 
+# but faire le plus gros score
+import random
+def controle_resultat ():
+    resultat = generation_resultat()
+    reussite = False
+    essai = input ("= ")
+    if int(essai) == resultat:
+        print ( 'ok bravo')
+        reussite = True
+    else :
+        print (f"dommage le résultat était {resultat}")
+        reussite = False
+    return reussite
+
+def generation_ope():
+    operation = ["+", "-", "*", "/"]
+    x = random.randrange(0,3)
+    ope = operation[x]
+    return ope
+
+def generation_resultat():
+    ope = generation_ope()
+    nombre1 = random.randrange(0,10)
+    nombre2 = random.randrange(1,10)
+    if ope == "+":
+        resultat = nombre1 + nombre2
+    elif ope == "-":
+        resultat = nombre1 - nombre2
+    elif ope == "*":
+        resultat = nombre1 * nombre2
+    elif ope == "/":
+        resultat = nombre1 / nombre2
+    else :
+        print("erreur de génération d'opérateur")
+    print(f"{nombre1} {ope} {nombre2} ")
+    return resultat
+
+
+VIE = 3
+score = 0
+x = 0
+
+while VIE > 0 and score <= 1000 :
+    print(f"Vie : {VIE} || Score : {score} || multiplicateur {x} ")
+    if controle_resultat():
+        x= x + 1
+        score = score + 10 * x 
+    else :
+        x= 0
+        VIE = VIE -1
+
+if VIE == 0 :
+    print (f"vous avez perdu ! votre score est de {score} points")
+else :
+    print (f"vous avez atteint un score de {score} points, vous avez donc gagner bravo")
